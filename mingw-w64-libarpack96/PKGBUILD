@@ -1,0 +1,38 @@
+#Maintainer: Rafał Brzegowy <rafal.brzegowy@yahoo.com>
+
+_realname=libarpack96
+pkgbase=mingw-w64-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
+pkgver=2.1
+pkgrel=1
+pkgdesc="ARPACK is a collection of Fortran77 subroutines designed to solve large scale eigenvalue problems (mingw-w64)"
+arch=('any')
+depends=("${MINGW_PACKAGE_PREFIX}-gcc-libgfortran")
+makedepends=("${MINGW_PACKAGE_PREFIX}-perl")
+url="https://www.caam.rice.edu/software/ARPACK/"
+license=('BSD')
+source=("https://www.caam.rice.edu/software/ARPACK/SRC/arpack96.tar.Z"
+	0001-armake.inc.patch 
+	LICENSE)
+sha256sums=('2E550B5E99B8A07BE1EDE4EE9CCD0CB3B4DED0F565993BCD99D2BF5A2102F3E9'
+            '808EAF5AAB8789735CA9962A3C396AC930BE214EF773083EE6BA9DFE7CA19ADE'
+	    '0C973EBA3E84AF7B9C174C2DB0C784C4ED72A4264C04988B290F82569B4D1D2C')
+	    
+
+prepare() {  
+  cd "${srcdir}/ARPACK"
+  patch -Np1 -i "${srcdir}"/0001-armake.inc.patch
+}
+
+build() {    
+  cd "${srcdir}/ARPACK"
+  HOME=$(pwd)/.. make lib
+}
+
+package() {
+  mkdir -p ${pkgdir}${MINGW_PREFIX}/{lib,include/${_realname}}
+  cd "${srcdir}/ARPACK"
+  install -Dm644 lib*.a "${pkgdir}${MINGW_PREFIX}/lib"
+  install -Dm644 SRC/*.h "${pkgdir}${MINGW_PREFIX}/include/${_realname}"
+  install -Dm644 "${srcdir}"/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+}
