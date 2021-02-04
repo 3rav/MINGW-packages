@@ -1,0 +1,36 @@
+# Maintainer: eolianoe <eolianoe At GoogleMAIL DoT com>
+# Maintainer: A Austin <acm.austin at gmail.com>
+# Contributor: Martin Ortbauer <mortbauer@gmail.com>
+# Contributor: Rafal Brzegowy <rafal.brzegowy@yahoo.com>
+
+_realname=libtriangle
+pkgbase=mingw-w64-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
+pkgver=1.6
+pkgrel=1
+arch=('any')
+url='https://www.cs.cmu.edu/~quake/triangle.html'
+pkgdesc='A Two-Dimensional Quality Mesh Generator and Delaunay Triangulator (mingw-w64)'
+license=('custom')
+source=("${_realname}-${pkgver}.zip::http://www.netlib.org/voronoi/triangle.zip"
+	      "0000-fix.patch")
+sha256sums=('1766327ADD038495FA3499E9B7CC642179229750F7201B94F8E1B7BEE76F8480'
+            '0CE2DD80188BDD9AEECA8F45686DE9EA6E1E8BB33F3B6F11BA1E223B4C15E802')
+
+prepare() {
+  patch -Np1 -i ${srcdir}/0000-fix.patch
+}
+
+build(){
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+    ${MINGW_PREFIX}/bin/cmake \
+      -GNinja
+  
+    ${MINGW_PREFIX}/bin/cmake --build .
+}
+
+package() {
+  install -Dm644 triangle.h ${pkgdir}${MINGW_PREFIX}/include/triangle.h
+  install -Dm644 libtriangle.a ${pkgdir}${MINGW_PREFIX}/lib/libtriangle.a
+  install -Dm644 ${srcdir}/README ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+}
