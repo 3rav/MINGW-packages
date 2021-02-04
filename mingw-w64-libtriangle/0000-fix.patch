@@ -1,0 +1,37 @@
+diff -urN triangle.orig/CMakeLists.txt triangle/CMakeLists.txt
+--- triangle.orig/CMakeLists.txt	1970-01-01 01:00:00.000000000 +0100
++++ triangle/CMakeLists.txt	2021-02-04 10:41:49.849933100 +0100
+@@ -0,0 +1,11 @@
++cmake_minimum_required(VERSION 2.8.12)
++project(triangle)
++
++add_library(triangle STATIC triangle.c)
++target_compile_definitions(triangle PRIVATE -DTRILIBRARY -DANSI_DECLARATORS)
++if(WIN32)
++   target_compile_definitions(triangle PRIVATE -DNO_TIMER)
++endif()
++
++# Generate position independent code
++set_target_properties(triangle PROPERTIES POSITION_INDEPENDENT_CODE ON)
+diff -urN triangle.orig/triangle.h triangle/triangle.h
+--- triangle.orig/triangle.h	2021-02-04 10:40:42.913104500 +0100
++++ triangle/triangle.h	2021-02-04 10:44:06.062724000 +0100
+@@ -248,6 +248,18 @@
+ /*                                                                           */
+ /*****************************************************************************/
+ 
++#ifndef REAL
++#ifdef SINGLE
++#define REAL float
++#else /* not SINGLE */
++#define REAL double
++#endif /* not SINGLE */
++#endif
++
++#ifndef VOID
++#define VOID int
++#endif
++
+ struct triangulateio {
+   REAL *pointlist;                                               /* In / out */
+   REAL *pointattributelist;                                      /* In / out */
