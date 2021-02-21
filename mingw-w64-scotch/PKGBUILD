@@ -20,7 +20,7 @@ source=("https://gforge.inria.fr/frs/download.php/file/38352/${_realname}_${pkgv
 		"0004-dummysizes-regex.patch"
 )
 sha256sums=('a3bc3fa3b243fcb52f8d68de4272562a0328afb18a96f535724d284e36730485'
-            '2c55b1e99a8d40c976e7147aa9102db2d1c489da1b760e526b424bf5ffd12716'
+            'SKIP'
             '49d87533321504a9594d7bb4659fbced5afadd2fc0d73f0577b0b3ad47cc7d0f'
             '8a02cea7cdc3c685776012b2bb42cec8c5e98c435bdf1ffd62abf5ab6def9fbb'
             '92908a6598d333a35a3b76650c111a082304e9dfff7c9bc0667d6af62de47c14')
