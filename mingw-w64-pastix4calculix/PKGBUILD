@@ -12,8 +12,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-hwloc"
          "${MINGW_PACKAGE_PREFIX}-openblas"
          "${MINGW_PACKAGE_PREFIX}-scotch"
 	 "${MINGW_PACKAGE_PREFIX}-starpu")
-makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
-             "${MINGW_PACKAGE_PREFIX}-ninja")
+makedepends=("${MINGW_PACKAGE_PREFIX}-cmake")
 provides=("${MINGW_PACKAGE_PREFIX}-spm") # also provide the SpM library
 conflicts=("${MINGW_PACKAGE_PREFIX}-pastix")
 license=('CeCILL-C')
@@ -40,7 +39,7 @@ build() {
 
   MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
     ${MINGW_PREFIX}/bin/cmake \
-      -G"Ninja" \
+      -G"MSYS Makefiles" \
       -DCMAKE_INSTALL_PREFIX=${MINGW_PREFIX} \
       -DCMAKE_SYSTEM_IGNORE_PATH=/usr/lib \
       -DPASTIX_INT64=OFF \
@@ -61,7 +60,7 @@ build() {
 
   MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
     ${MINGW_PREFIX}/bin/cmake \
-      -G"Ninja" \
+      -G"MSYS Makefiles" \
       -DCMAKE_INSTALL_PREFIX=${MINGW_PREFIX} \
       -DCMAKE_SYSTEM_IGNORE_PATH=/usr/lib \
       -DPASTIX_INT64=OFF \
