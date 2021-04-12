@@ -7,6 +7,7 @@ pkgver=2.17
 pkgrel=1
 pkgdesc='High performance parallel solver for very large sparse linear systems based on direct methods for CalucliX (mingw-w64)'
 arch=('any')
+mingw_arch=('mingw32' 'mingw64' 'ucrt64')
 depends=("${MINGW_PACKAGE_PREFIX}-hwloc"
          "${MINGW_PACKAGE_PREFIX}-metis"
          "${MINGW_PACKAGE_PREFIX}-openblas"
