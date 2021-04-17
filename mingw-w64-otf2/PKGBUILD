@@ -1,0 +1,44 @@
+# Maintainer: James Spencer <james.s.spencer@gmail.com>
+# Contributor: Rafal Brzegowy <rafal.brzegowy@yahoo.com>
+
+_realname=otf2
+pkgbase=mingw-w64-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
+pkgver=2.2
+pkgrel=1
+pkgdesc="Scalable, memory efficient event trace data format and support library."
+arch=('any')
+mingw_arch=('mingw32' 'mingw64' 'ucrt64')
+depends=("${MINGW_PACKAGE_PREFIX}-python2")
+url="http://www.vi-hps.org/projects/score-p/"
+license=('BSD')
+source=(https://www.vi-hps.org/cms/upload/packages/${_realname}/${_realname}-${pkgver}.tar.gz)
+sha256sums=('d0519af93839dc778eddca2ce1447b1ee23002c41e60beac41ea7fe43117172d')
+
+prepare() {
+  cd ${_realname}-${pkgver}
+  autoreconf -fiv
+}
+
+build() {
+  [[ -d "${srcdir}/build-${MINGW_CHOST}" ]] && rm -rf "${srcdir}/build-${MINGW_CHOST}"
+  mkdir -p "${srcdir}/build-${MINGW_CHOST}" && cd "${srcdir}/build-${MINGW_CHOST}"
+
+  ../${_realname}-${pkgver}/configure \
+    --prefix=${MINGW_PREFIX} \
+    --build=${MINGW_CHOST} \
+    --host=${MINGW_CHOST}
+    
+  make
+}
+
+check() {
+  cd "${srcdir}/build-${MINGW_CHOST}"
+  make check || true
+}
+
+package() {
+  cd "${srcdir}/build-${MINGW_CHOST}"
+  make install DESTDIR="${pkgdir}"
+  install -Dm644 ${srcdir}/${_realname}-${pkgver}/COPYING "${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/COPYING"
+}
