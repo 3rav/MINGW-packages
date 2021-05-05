@@ -17,11 +17,9 @@ mingw_arch=('mingw32' 'mingw64' 'ucrt64')
 depends=("${MINGW_PACKAGE_PREFIX}-python"
          "${MINGW_PACKAGE_PREFIX}-openblas"
          "${MINGW_PACKAGE_PREFIX}-boost"
-	       "${MINGW_PACKAGE_PREFIX}-msmpi"
          "${MINGW_PACKAGE_PREFIX}-netcdf"
 	       "${MINGW_PACKAGE_PREFIX}-hdf5")
 makedepends=("unzip"
-             "${MINGW_PACKAGE_PREFIX}-msmpi"
              "${MINGW_PACKAGE_PREFIX}-perl"
              "${MINGW_PACKAGE_PREFIX}-ninja"
              "${MINGW_PACKAGE_PREFIX}-cmake")
