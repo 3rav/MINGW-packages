@@ -46,8 +46,8 @@ build() {
       -DCMAKE_BUILD_TYPE=Release \
       -DBLAS_LIBRARY_NAMES="openblas" \
       -DLAPACK_LIBRARY_NAMES="openblas" \
-      -DMPI_USE_COMPILER_WRAPPERS=ON \
-      -DTPL_ENABLE_MPI=ON \
+      -DMPI_USE_COMPILER_WRAPPERS=OFF \
+      -DTPL_ENABLE_MPI=OFF \
       -DTrilinos_ENABLE_ALL_PACKAGES=OFF \
       -DTrilinos_ENABLE_OpenMP=ON \
       -DTrilinos_ENABLE_ML=ON \
