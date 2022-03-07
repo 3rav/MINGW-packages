@@ -84,6 +84,12 @@ package() {
   cd "${srcdir}/${_realname}-${_releases}/build-${MSYSTEM}-shared"
   DESTDIR=${pkgdir} cmake --build . --target install
   install -Dm644 "${srcdir}/${_realname}-${_releases}"/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+  
+  local PREFIX_WIN=$(cygpath -wm ${MINGW_PREFIX})
+  for _f in "${pkgdir}${MINGW_PREFIX}"/lib/cmake/${_realname}/*.cmake; do
+    sed -e "s|${PREFIX_WIN}|\$\{_IMPORT_PREFIX\}|g" -i ${_f}
+    sed -e "s|${MINGW_PREFIX}|\$\{_IMPORT_PREFIX\}|g" -i ${_f}
+  done
 
   #remove useless file, a "fake" mpi interface that allows us to use MPI-enabled codes/libraries (e.g. zoltan) in an application that is built without MPI, conflict with msmpi:
   rm -r ${pkgdir}${MINGW_PREFIX}/include/mpi.h
