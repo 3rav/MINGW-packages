@@ -10,7 +10,8 @@ arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32')
 depends=("${MINGW_PACKAGE_PREFIX}-tfel"
          "${MINGW_PACKAGE_PREFIX}-gnuplot")
-makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
+makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
+             "${MINGW_PACKAGE_PREFIX}-cmake"
              "${MINGW_PACKAGE_PREFIX}-ninja")
 url="https://github.com/thelfer/MFrontGallery"
 license=("LGPL-3")
