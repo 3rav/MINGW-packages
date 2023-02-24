@@ -1,0 +1,50 @@
+# Maintainer (msys): Rafał Brzegowy <rafal.brzegfowy@yahoo.com>
+
+_realname=ginkgo
+pkgbase=mingw-w64-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
+pkgver=1.5.0
+pkgrel=1
+pkgdesc='Ginkgo is a high-performance linear algebra library for manycore systems (mingw-w64)'
+arch=('any')
+mingw_arch=('mingw64' 'ucrt64' 'clang64')
+url="https://github.com/ginkgo-project/ginkgo"
+license=('spdx:BSD-3-Clause')
+depends=("${MINGW_PACKAGE_PREFIX}-cc"
+         "${MINGW_PACKAGE_PREFIX}-hwloc"
+         "${MINGW_PACKAGE_PREFIX}-omp")
+makedepends=("${MINGW_PACKAGE_PREFIX}-ninja"
+             "${MINGW_PACKAGE_PREFIX}-cmake")
+source=("https://github.com/ginkgo-project/ginkgo/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=("9B24CE0A17EBDF08AA65E87AF2D81D6D1E2C94CE317BB26CD32CE47DEA8B4BAD")
+
+build() {
+  [[ -d "${srcdir}/build-${MSYSTEM}" ]] && rm -rf "${srcdir}/build-${MSYSTEM}"
+  mkdir -p "${srcdir}/build-${MSYSTEM}" && cd "${srcdir}/build-${MSYSTEM}"
+  
+  declare -a _extra_config
+  if check_option "debug" "n"; then
+    _extra_config+=("-DCMAKE_BUILD_TYPE=Release")
+  else
+    _extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
+  fi
+  
+  MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
+    "${MINGW_PREFIX}"/bin/cmake.exe \
+      -GNinja \
+      -DCMAKE_INSTALL_PREFIX="${MINGW_PREFIX}" \
+      -DGINKGO_BUILD_EXAMPLES=OFF \
+      -DGINKGO_BUILD_TESTS=OFF \
+      -DGINKGO_BUILD_HWLOC=ON \
+      "${_extra_config[@]}" \
+      ../${_realname}-${pkgver}
+
+  "${MINGW_PREFIX}"/bin/cmake.exe --build .
+}
+
+package() {
+  cd "${srcdir}/build-${MSYSTEM}"
+
+  DESTDIR="${pkgdir}" "${MINGW_PREFIX}"/bin/cmake.exe --install .
+  install -Dm644 ${srcdir}/${_realname}-${pkgver}/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+}
