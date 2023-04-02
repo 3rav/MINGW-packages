@@ -5,7 +5,7 @@ _realname=mfem
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
 pkgver=4.5.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Lightweight, general, scalable C++ library for finite element methods (mingw-w64)'
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64')
@@ -19,7 +19,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-gcc-libs"
          #$([[ ${MINGW_PACKAGE_PREFIX} == *-clang-* ]] || echo "${MINGW_PACKAGE_PREFIX}-mumps")
          "${MINGW_PACKAGE_PREFIX}-omp"
          "${MINGW_PACKAGE_PREFIX}-openblas"
-         #"${MINGW_PACKAGE_PREFIX}-petsc"
+         "${MINGW_PACKAGE_PREFIX}-petsc"
          #"${MINGW_PACKAGE_PREFIX}-slepc"
          "${MINGW_PACKAGE_PREFIX}-suitesparse"
          "${MINGW_PACKAGE_PREFIX}-sundials")
@@ -33,6 +33,9 @@ source=("${_realname}-${pkgver}.tar.gz::$url/archive/v$pkgver.tar.gz")
 sha256sums=('9431d72a2834078f25c58430767bf2fd62bf43a0feb003189a86847c68b8af4a')
 
 build() {
+  local PREFIX_WIN=$(cygpath -wm ${MINGW_PREFIX})
+  . ${MINGW_PREFIX}/src/petsc-*/petsc
+
   declare -a _extra_config
   if check_option "debug" "n"; then
     _extra_config+=("-DCMAKE_BUILD_TYPE=Release")
@@ -56,6 +59,7 @@ build() {
       -DMFEM_USE_MPI=ON \
       -DMFEM_USE_NETCDF=ON \
       -DMFEM_USE_OPENMP=ON \
+      -DMFEM_USE_PETSC=ON \
       -DMFEM_USE_SUITESPARSE=ON \
       -DMFEM_USE_SUNDIALS=ON \
       -DMFEM_USE_ZLIB=ON \
@@ -64,6 +68,9 @@ build() {
       -DMFEM_ENABLE_MINIAPPS=OFF \
       -DBLA_VENDOR=OpenBLAS \
       -DHDF5_DIR=${MINGW_PREFIX} \
+      -DPETSC_ARCH=dmo \
+      -DPETSC_DIR=${MINGW_PREFIX}/src/petsc-${petsc_pkgver} \
+      -DPETSC_INCLUDES="$PREFIX_WIN/src/petsc-${petsc_pkgver}/include;$PREFIX_WIN/src/petsc-${petsc_pkgver}/$PETSC_ARCH/include" \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
@@ -84,6 +91,7 @@ build() {
       -DMFEM_USE_MPI=ON \
       -DMFEM_USE_NETCDF=ON \
       -DMFEM_USE_OPENMP=ON \
+      -DMFEM_USE_PETSC=ON \
       -DMFEM_USE_SUITESPARSE=ON \
       -DMFEM_USE_SUNDIALS=ON \
       -DMFEM_USE_ZLIB=ON \
@@ -92,6 +100,9 @@ build() {
       -DMFEM_ENABLE_MINIAPPS=OFF \
       -DBLA_VENDOR=OpenBLAS \
       -DHDF5_DIR=${MINGW_PREFIX} \
+      -DPETSC_ARCH=dmo \
+      -DPETSC_DIR=${MINGW_PREFIX}/src/petsc-${petsc_pkgver} \
+      -DPETSC_INCLUDES="$PREFIX_WIN/src/petsc-${petsc_pkgver}/include;$PREFIX_WIN/src/petsc-${petsc_pkgver}/$PETSC_ARCH/include" \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
