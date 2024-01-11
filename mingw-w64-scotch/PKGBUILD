@@ -3,7 +3,7 @@
 _realname=scotch
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}"
-         "${MINGW_PACKAGE_PREFIX}-${_realname}-int64")
+         "${MINGW_PACKAGE_PREFIX}-${_realname}64")
 pkgdesc='Graph partitioning and sparse matrix ordering package (mingw-w64)'
 pkgver=7.0.4
 pkgrel=1
@@ -121,7 +121,7 @@ package_scotch()
   _package_scotch "32"
 }
 
-package_scotch-int64() {
+package_scotch64() {
   pkgdesc="Graph partitioning and sparse matrix ordering package with 64-bit indexing (mingw-w64)"
   provides=("${MINGW_PACKAGE_PREFIX}-${_realname}")
   conflicts=("${MINGW_PACKAGE_PREFIX}-${_realname}")
