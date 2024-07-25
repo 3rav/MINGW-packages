@@ -15,14 +15,14 @@ license=('spdx:LGPL-3.0-or-later')
 depends=("${MINGW_PACKAGE_PREFIX}-gcc-libs"
          "${MINGW_PACKAGE_PREFIX}-boost"
          "${MINGW_PACKAGE_PREFIX}-libxml2"
-         #"${MINGW_PACKAGE_PREFIX}-petsc"
+         "${MINGW_PACKAGE_PREFIX}-petsc"
          "${MINGW_PACKAGE_PREFIX}-python"
          "${MINGW_PACKAGE_PREFIX}-python-numpy")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              "${MINGW_PACKAGE_PREFIX}-cmake"
              "${MINGW_PACKAGE_PREFIX}-msmpi"
              #"${MINGW_PACKAGE_PREFIX}-ninja"
-             #"${MINGW_PACKAGE_PREFIX}-petsc-build"
+             "${MINGW_PACKAGE_PREFIX}-petsc-build"
              "${MINGW_PACKAGE_PREFIX}-eigen3"
              "git")
 source=(${_realname}-${pkgver}.tar.gz::https://github.com/${_realname}/${_realname}/archive/v${pkgver}.tar.gz
@@ -46,12 +46,12 @@ prepare() {
 
 build() {
   local PREFIX_WIN=$(cygpath -wm ${MINGW_PREFIX})
-  # . ${MINGW_PREFIX}/src/petsc/petsc
-  # for build in ${petsc_builds}; do
-  #   #export PETSC_ARCH=${build}
-  #   export PETSC_ARCH=dmo
-  #   export PETSC_DIR=${MINGW_PREFIX}/src/petsc
-  # done
+   . ${MINGW_PREFIX}/src/petsc/petsc
+   for build in ${petsc_builds}; do
+     #export PETSC_ARCH=${build}
+     export PETSC_ARCH=dmo
+     export PETSC_DIR=${MINGW_PREFIX}/src/petsc
+   done
 
   declare -a extra_config
   if check_option "debug" "n"; then
