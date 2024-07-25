@@ -25,7 +25,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              #"${MINGW_PACKAGE_PREFIX}-petsc-build"
              "${MINGW_PACKAGE_PREFIX}-eigen3"
              "git")
-source=(https://github.com/precice/precice/archive/v${pkgver}/${_realname}-${pkgver}.tar.gz
+source=(https://github.com/${pkgname}/${pkgname}/archive/v${pkgver}/${pkgver}.tar.gz
         001-fix-libprecice-dll-installation.patch
         002-fix-build-with-libxml2-2.12.patch)
 sha256sums=('E06D5E183F584C51812DCDDF958210D1195BEA38FA2DF13BE72303DCB06C869B'
