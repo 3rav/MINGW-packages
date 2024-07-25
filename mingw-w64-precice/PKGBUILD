@@ -26,11 +26,9 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              "${MINGW_PACKAGE_PREFIX}-eigen3"
              "git")
 source=(${_realname}-${pkgver}.tar.gz::https://github.com/${_realname}/${_realname}/archive/v${pkgver}.tar.gz
-        001-fix-libprecice-dll-installation.patch
-        002-fix-build-with-libxml2-2.12.patch)
+        001-fix-libprecice-dll-installation.patch)
 sha256sums=('E06D5E183F584C51812DCDDF958210D1195BEA38FA2DF13BE72303DCB06C869B'
-            '49fe04f9e72d1034b8909a7b593ccf42eeaf5203d9188f71706260948a0fb566'
-            '9704b031c26f5be50a2ba08b3757f26d5c661e707145c1a5b170704002019480')
+            '49fe04f9e72d1034b8909a7b593ccf42eeaf5203d9188f71706260948a0fb566')
 
 apply_patch_with_msg() {
   for _patch in "$@"
@@ -43,8 +41,7 @@ apply_patch_with_msg() {
 prepare() {
   cd ${_realname}-${pkgver}
   apply_patch_with_msg \
-    001-fix-libprecice-dll-installation.patch \
-    002-fix-build-with-libxml2-2.12.patch
+    001-fix-libprecice-dll-installation.patch
 }
 
 build() {
