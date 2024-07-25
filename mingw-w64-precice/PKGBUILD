@@ -48,8 +48,8 @@ build() {
   local PREFIX_WIN=$(cygpath -wm ${MINGW_PREFIX})
    . ${MINGW_PREFIX}/src/petsc/petsc
    for build in ${petsc_builds}; do
-     #export PETSC_ARCH=${build}
-     export PETSC_ARCH=dmo
+     export PETSC_ARCH=${build}
+     #export PETSC_ARCH=dmo
      export PETSC_DIR=${MINGW_PREFIX}/src/petsc
    done
 
