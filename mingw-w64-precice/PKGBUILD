@@ -83,7 +83,7 @@ build() {
       -DPRECICE_PETScMapping=OFF \
       -DPRECICE_PythonActions=ON \
       -DPRECICE_BUILD_TOOLS=OFF \
-      -DPC_PETSc_INCLUDE_DIRS="$PREFIX_WIN/src/petsc/include;$PREFIX_WIN/src/petsc/$PETSC_ARCH/include" \
+      #-DPC_PETSc_INCLUDE_DIRS="$PREFIX_WIN/src/petsc/include;$PREFIX_WIN/src/petsc/$PETSC_ARCH/include" \
       -Wno-dev \
       ../${_realname}-${pkgver}
 
@@ -104,7 +104,7 @@ build() {
       -DPRECICE_MPICommunication=ON \
       -DPRECICE_PETScMapping=OFF \
       -DPRECICE_PythonActions=ON \
-      -DPC_PETSc_INCLUDE_DIRS="$PREFIX_WIN/src/petsc/include;$PREFIX_WIN/src/petsc/$PETSC_ARCH/include" \
+      #-DPC_PETSc_INCLUDE_DIRS="$PREFIX_WIN/src/petsc/include;$PREFIX_WIN/src/petsc/$PETSC_ARCH/include" \
       -Wno-dev \
       ../${_realname}-${pkgver}
 
