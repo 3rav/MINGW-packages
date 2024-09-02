@@ -1,0 +1,37 @@
+# Maintainer: Brzegowy Rafał <rafal.brzegowy@gmail.com>
+
+_realname=wslink
+pkgbase=mingw-w64-python-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-python-${_realname}")
+pkgver=2.1.2
+pkgrel=1
+pkgdesc='Python/JavaScript library for communicating over WebSocket (mingw-w64)'
+arch=('any')
+mingw_arch=('mingw64' 'ucrt64' 'clang64')
+url="https://github.com/Kitware/${_realname}"
+license=('BSD-3-Clause')
+depends=("${MINGW_PACKAGE_PREFIX}-python-aiohttp")
+makedepends=("${MINGW_PACKAGE_PREFIX}-python-build"
+             "${MINGW_PACKAGE_PREFIX}-python-installer"
+             "${MINGW_PACKAGE_PREFIX}-python-setuptools"
+             "${MINGW_PACKAGE_PREFIX}-python-wheel")
+source=("https://github.com/Kitware/${_realname}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('7100e4a9378df5e9fb3569510ff4f66d29de8c011a68599c9e00b003ccd5c21d')
+
+prepare() {
+  sed -i 's/^include/#include/' ${_realname}-${pkgver}/python/MANIFEST.in
+}
+
+build() {
+  cp -r "${_realname}-${pkgver}" "python-build-${MSYSTEM}/python" && cd "python-build-${MSYSTEM}/python"
+
+  ${MINGW_PREFIX}/bin/python -m build --wheel --skip-dependency-check --no-isolation
+}
+
+package() {
+  cd "${srcdir}/python-build-${MSYSTEM}/python"
+
+  MSYS2_ARG_CONV_EXCL="--prefix=" \
+    ${MINGW_PREFIX}/bin/python -m installer --prefix=${MINGW_PREFIX} \
+    --destdir="${pkgdir}" dist/*.whl
+}
