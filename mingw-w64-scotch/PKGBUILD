@@ -73,7 +73,7 @@ build() {
   mkdir -p "${srcdir}"/build-${MSYSTEM}-shared-32 && cd "${srcdir}"/build-${MSYSTEM}-shared-32
 
   msg2 "Build shared Scotch with 32-bit indexing"
-  _build_scotch "-DINTSIZE=32 -DBUILD_SHARED_LIBS=ON -DCMAKE_CURRENT_SOURCE_DIR=${srcdir}/build-${MSYSTEM}-shared-32 \"
+  _build_scotch "-DINTSIZE=32 -DBUILD_SHARED_LIBS=ON -DCMAKE_CURRENT_SOURCE_DIR=${srcdir}/build-${MSYSTEM}-shared-32"
 
   mkdir -p "${srcdir}"/build-${MSYSTEM}-static-64 && cd "${srcdir}"/build-${MSYSTEM}-static-64
   
