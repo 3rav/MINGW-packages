@@ -58,6 +58,7 @@ _build_scotch() {
     -DBUILD_PTSCOTCH=ON \
     -DBUILD_LIBESMUMPS=ON \
     -DBUILD_LIBSCOTCHMETIS=OFF \
+    -DCMAKE_CURRENT_SOURCE_DIR=${srcdir} \
     ../${_realname}-v${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
