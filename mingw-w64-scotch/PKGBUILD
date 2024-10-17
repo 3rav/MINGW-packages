@@ -62,6 +62,7 @@ _build_scotch() {
     -DBUILD_LIBSCOTCHMETIS=OFF \
     -DMPI_THREAD_MULTIPLE=OFF \
     -DBUILD_PTSCOTCH=ON \
+    -DCOMMON_OS_WINDOWS=ON \
     ../${_realname}-v${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
@@ -130,4 +131,3 @@ for _name in "${pkgname[@]}"; do
   eval "${_func/#${_short}/package_${_name}}"
 done
 # template end;
-#             
