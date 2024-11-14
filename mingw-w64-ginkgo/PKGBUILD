@@ -16,8 +16,8 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-ninja"
              'git')
 license=('spdx:BSD-3-Clause')
 url="https://ginkgo-project.github.io"
-source=("https://github.com/ginkgo-project/${_realname}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('421efaed1be2ef11d230b79fc68bcf7e264a2c57ae52aff6dec7bd90f8d4ae30')
+source=("https://github.com/ginkgo-project/ginkgo/archive/refs/heads/batch_dynamic_cast.zip")
+sha256sums=('SKIP')
 
 build() {
 
