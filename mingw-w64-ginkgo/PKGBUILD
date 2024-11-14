@@ -34,7 +34,7 @@ build() {
       -DGINKGO_BUILD_HWLOC=ON \
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
-      ../${_realname}-${pkgver}
+      ../ginkgo-batch_dynamic_cast
 
   ${MINGW_PREFIX}/bin/cmake --build .
   
@@ -50,7 +50,7 @@ build() {
       -DGINKGO_BUILD_HWLOC=ON \
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
-      ../${_realname}-${pkgver}
+      ../ginkgo-batch_dynamic_cast
 
   ${MINGW_PREFIX}/bin/cmake --build .
 }
@@ -63,5 +63,5 @@ package() {
   #Shared Install
   cd "${srcdir}/build-${MSYSTEM}-shared"
   DESTDIR="${pkgdir}" ${MINGW_PREFIX}/bin/cmake --install .
-  install -Dm644 ${srcdir}/${_realname}-${pkgver}/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+  install -Dm644 ${srcdir}/ginkgo-batch_dynamic_cast/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
 }
