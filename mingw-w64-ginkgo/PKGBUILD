@@ -34,6 +34,7 @@ build() {
       -DGINKGO_BUILD_HWLOC=ON \
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
+      -DGINKGO_BUILD_EXAMPLES=OFF \
       ../ginkgo-batch_dynamic_cast
 
   ${MINGW_PREFIX}/bin/cmake --build .
@@ -50,6 +51,7 @@ build() {
       -DGINKGO_BUILD_HWLOC=ON \
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
+      -DGINKGO_BUILD_EXAMPLES=OFF \
       ../ginkgo-batch_dynamic_cast
 
   ${MINGW_PREFIX}/bin/cmake --build .
