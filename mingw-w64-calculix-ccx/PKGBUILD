@@ -4,7 +4,7 @@ _realname=calculix-ccx
 pkgbase=mingw-w64-${_realname}
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
 pkgver=2.21
-pkgrel=1
+pkgrel=2
 pkgdesc="CalculiX: 3D Structural Finite Element Program - Solver (mingw-w64)"
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64')
@@ -42,7 +42,7 @@ build()
     export FFLAGS="-fallow-argument-mismatch -fopenmp -O2"
     export OMP_LIBS="-lgomp -lquadmath"
   else
-    CFLAGS+=" -fopenmp -Wno-implicit-function-declaration"
+    CFLAGS+=" -fopenmp -Wno-implicit-function-declaration -Wno-incompatible-pointer-types"
     FC=flang
     export FFLAGS="-O2"
     export OMP_LIBS="-lomp"
