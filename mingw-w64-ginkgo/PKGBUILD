@@ -3,7 +3,7 @@
 _realname=ginkgo
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
-pkgver=1.8.0
+pkgver=1.9.0
 pkgrel=1
 pkgdesc='Numerical linear algebra software package (mingw-w64)'
 arch=('any')
@@ -16,7 +16,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-ninja"
              'git')
 license=('spdx:BSD-3-Clause')
 url="https://ginkgo-project.github.io"
-source=("https://github.com/ginkgo-project/ginkgo/archive/refs/heads/batch_dynamic_cast.zip")
+source=("https://github.com/ginkgo-project/${_realname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('SKIP')
 
 build() {
@@ -35,7 +35,7 @@ build() {
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
-      ../ginkgo-batch_dynamic_cast
+      ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
   
@@ -52,7 +52,7 @@ build() {
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
-      ../ginkgo-batch_dynamic_cast
+      ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
 }
@@ -65,5 +65,5 @@ package() {
   #Shared Install
   cd "${srcdir}/build-${MSYSTEM}-shared"
   DESTDIR="${pkgdir}" ${MINGW_PREFIX}/bin/cmake --install .
-  install -Dm644 ${srcdir}/ginkgo-batch_dynamic_cast/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
+  install -Dm644 ${srcdir}/${_realname}-${pkgver}/LICENSE ${pkgdir}${MINGW_PREFIX}/share/licenses/${_realname}/LICENSE
 }
