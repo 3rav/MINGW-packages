@@ -35,6 +35,7 @@ build() {
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
+      -DGINKGO_ENABLE_HALF=OFF \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
@@ -52,6 +53,7 @@ build() {
       -DGINKGO_BUILD_TESTS=OFF \
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
+      -DGINKGO_ENABLE_HALF=OFF \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
