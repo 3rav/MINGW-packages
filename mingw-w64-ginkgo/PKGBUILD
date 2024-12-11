@@ -4,7 +4,7 @@ _realname=ginkgo
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
 pkgver=1.9.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Numerical linear algebra software package (mingw-w64)'
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64')
@@ -38,6 +38,7 @@ build() {
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
       -DGINKGO_ENABLE_HALF=OFF \
+      -DGINKGO_BUILD_HIP=ON \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
@@ -57,6 +58,7 @@ build() {
       -DGINKGO_BUILD_BENCHMARKS=OFF \
       -DGINKGO_BUILD_EXAMPLES=OFF \
       -DGINKGO_ENABLE_HALF=OFF \
+      -DGINKGO_BUILD_HIP=ON \
       ../${_realname}-${pkgver}
 
   ${MINGW_PREFIX}/bin/cmake --build .
