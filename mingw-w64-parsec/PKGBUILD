@@ -30,7 +30,7 @@ build() {
   mkdir -p "${srcdir}/build-${MINGW_CHOST}-static" && cd "${srcdir}/build-${MINGW_CHOST}-static"
 
   # for asprintf
-  CFLAGS+=" -D_GNU_SOURCE -Wno-implicit-function-declaratio -Wno-incompatible-pointer-types"
+  CFLAGS+=" -D_GNU_SOURCE -Wno-implicit-function-declaration -Wno-incompatible-pointer-types"
 
   MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
     ${MINGW_PREFIX}/bin/cmake \
