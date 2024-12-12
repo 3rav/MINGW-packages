@@ -3,7 +3,7 @@
 _realname=parsec
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
-pkgver=3.0.2209
+pkgver=4.0.2411
 pkgrel=1
 pkgdesc='PaRSEC: Parallel Runtime Scheduling and Execution Controller (mingw-w64)'
 arch=('any')
@@ -16,7 +16,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-hwloc"
 license=('custom')
 url='https://icl.utk.edu/parsec/'
 source=("https://github.com/ICLDisco/parsec/archive/refs/tags/parsec-${pkgver}.tar.gz")
-sha256sums=('67d383d076991484cb2a265f56420abdea7cc1f329c63ac65a3e96fbfb6cc295')
+sha256sums=('SKIP')
 
 prepare() {
     cd ${srcdir}
