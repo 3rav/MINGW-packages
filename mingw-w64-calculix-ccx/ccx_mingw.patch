@@ -1,6 +1,6 @@
 --- a/Makefile_mingw_i8
 +++ b/Makefile_mingw_i8
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,45 @@
 +#Specify where to store the generated .o files
 +OBJDIR = ccx_i8
 +
@@ -22,6 +22,7 @@
 +	$(FC) $(FFLAGS) -c $< -o $@
 +
 +include Makefile.inc
++SCCXF += ext_dload.f
 +
 +SCCXMAIN = ccx_$(CCX_VERSION).c
 +
@@ -47,7 +48,7 @@
 +	rm -f $(OBJDIR)/*.o $(OBJDIR)/ccx_$(CCX_VERSION).a $(OBJDIR)/ccx_$(OBJDIR).exe
 --- a/Makefile_mingw_i4
 +++ b/Makefile_mingw_i4
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,45 @@
 +#Specify where to store the generated .o files
 +OBJDIR = ccx_i4
 +
@@ -68,6 +69,7 @@
 +	$(FC) $(FFLAGS) -c $< -o $@
 +
 +include Makefile.inc
++SCCXF += ext_dload.f
 +
 +SCCXMAIN = ccx_$(CCX_VERSION).c
 +
