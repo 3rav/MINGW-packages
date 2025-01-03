@@ -1,10 +1,10 @@
-# Maintainer: Rafal Brzegowy <rafal.brzegowy@yahoo.com>
+# Maintainer: Rafał Brzegowy <rafal.brzegowy@yahoo.com>
 
 _realname=hypre
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}")
-pkgver=2.31.0
-pkgrel=2
+pkgver=2.32.0
+pkgrel=1
 pkgdesc='A library for solving large, sparse linear systems on massively parallel computers (mingw-w64)'
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64')
@@ -25,7 +25,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              "${MINGW_PACKAGE_PREFIX}-msmpi")
 source=("https://github.com/hypre-space/hypre/archive/v${pkgver}/${_realname}-${pkgver}.tar.gz"
         "0001-fix-win32-check.patch")
-sha256sums=('9a7916e2ac6615399de5010eb39c604417bb3ea3109ac90e199c5c63b0cb4334'
+sha256sums=('2277b6f01de4a7d0b01cfe12615255d9640eaa02268565a7ce1a769beab25fa1'
             '9402d6d7115dc5e9f65209281c6783d973fe7fdc184963a9b346686023737ba1')
 
 prepare() {
