@@ -1,0 +1,52 @@
+diff -urN pardiso_orig/pardiso.c pardiso/pardiso.c
+--- pardiso_orig/pardiso.c	2024-12-21 18:14:59.775603200 +0100
++++ pardiso/pardiso.c	2025-02-10 19:38:23.527057100 +0100
+@@ -349,9 +349,15 @@
+ 
+   mkl_domain_set_num_threads(mthread_mkl,MKL_DOMAIN_PARDISO);
+   
++#ifdef INTSIZE64
++  FORTRAN(pardiso_64,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
++		   pointers,icolpardiso,perm,&nrhs,iparm,&msglvl,
++                   b,x,&error));
++#else
+   FORTRAN(pardiso,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
+ 		   pointers,icolpardiso,perm,&nrhs,iparm,&msglvl,
+                    b,x,&error));
++#endif
+ 
+   return;
+ }
+@@ -386,9 +392,15 @@
+ 
+   NNEW(x,double,*nrhs**neq);
+ 
+-  FORTRAN(pardiso,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
++#ifdef INTSIZE64
++  FORTRAN(pardiso_64,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
+ 		   pointers,icolpardiso,perm,nrhs,iparm,&msglvl,
+                    b,x,&error));
++#else
++  FORTRAN(pardiso,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
++		   pointers,icolpardiso,perm,&nrhs,iparm,&msglvl,
++                   b,x,&error));
++#endif
+ 
+   for(i=0;i<*nrhs**neq;i++){b[i]=x[i];}
+   SFREE(x);
+@@ -412,9 +424,15 @@
+     }
+   }
+ 
++#ifdef INTSIZE64
++  FORTRAN(pardiso_64,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
++		   pointers,icolpardiso,perm,&nrhs,iparm,&msglvl,
++                   b,x,&error));
++#else
+   FORTRAN(pardiso,(pt,&maxfct,&mnum,&mtype,&phase,neq,aupardiso,
+ 		   pointers,icolpardiso,perm,&nrhs,iparm,&msglvl,
+                    b,x,&error));
++#endif
+ 
+   SFREE(icolpardiso);
+   SFREE(aupardiso);
