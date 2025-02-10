@@ -4,7 +4,7 @@ _realname=calculix-ccx
 pkgbase=mingw-w64-${_realname}
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
 pkgver=2.22
-pkgrel=3
+pkgrel=4
 pkgdesc="CalculiX: 3D Structural Finite Element Program - Solver (mingw-w64)"
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
@@ -26,13 +26,15 @@ source=("http://www.dhondt.de/ccx_${pkgver}.src.tar.bz2"
         "ccx_mingw.patch"
         "ccx_ooc.patch"
         "ccx_numeric_format.patch"
-        "ccx_adapt_main_pastix.patch")
+        "ccx_adapt_main_pastix.patch"
+        "ccx_fix_pardiso.patch")
 sha256sums=('3a94dcc775a31f570229734b341d6b06301ebdc759863df901c8b9bf1854c0bc'
             '8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643'
             'd85b176778749afa352c926d0c788906dc7d75bb0fa9dd977d5f23bfbe6812b0'
             'dd81df3de137a05b45e39fe61830337e6405ec566148598dab2828a6d9780e8a'
             '48323c6fb59b4af34b75be23819848b782fc1cb0428189d9545ed66d6a1bc10e'
-            '04db3443e3f199162cdfa4458a190dd660831a573b39a049bfe1156cca0be404')
+            '04db3443e3f199162cdfa4458a190dd660831a573b39a049bfe1156cca0be404'
+            '94a899da9c9eed05f80ebd22a1c7362c69977314db59c6f94b9690deb1ba3e94')
 
 apply_patch_with_msg() {
   for _patch in "$@"
@@ -48,7 +50,8 @@ prepare() {
    ccx_mingw.patch \
    ccx_ooc.patch \
    ccx_numeric_format.patch \
-   ccx_adapt_main_pastix.patch
+   ccx_adapt_main_pastix.patch \
+   ccx_fix_pardiso.patch
 }
 
 build() {
