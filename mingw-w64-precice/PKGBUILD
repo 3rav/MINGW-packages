@@ -18,6 +18,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-cc-libs"
          #"${MINGW_PACKAGE_PREFIX}-petsc"
          "${MINGW_PACKAGE_PREFIX}-python"
          "${MINGW_PACKAGE_PREFIX}-ginkgo"
+         "${MINGW_PACKAGE_PREFIX}-trilinos"
          "${MINGW_PACKAGE_PREFIX}-python-numpy")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              "${MINGW_PACKAGE_PREFIX}-cmake"
