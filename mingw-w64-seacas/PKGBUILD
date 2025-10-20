@@ -51,6 +51,8 @@ build() {
     extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
   fi
 
+  CFLAGS+=" -Wno-implicit-function-declaration"
+
   #Static Build
   mkdir -p "${_realname}-${_releases}/build-${MSYSTEM}-static" && cd "${_realname}-${_releases}/build-${MSYSTEM}-static"
 
