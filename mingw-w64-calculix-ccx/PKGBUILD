@@ -1,10 +1,10 @@
-# Maintainer: RafaĹ‚ Brzegowy <rafal.brzegowy@yahoo.com>
+# Maintainer: Rafał‚ Brzegowy <rafal.brzegowy@yahoo.com>
 
 _realname=calculix-ccx
 pkgbase=mingw-w64-${_realname}
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
 pkgver=2.22
-pkgrel=4
+pkgrel=5
 pkgdesc="CalculiX: 3D Structural Finite Element Program - Solver (mingw-w64)"
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
@@ -17,7 +17,8 @@ depends=("${MINGW_PACKAGE_PREFIX}-arpack"
          "${MINGW_PACKAGE_PREFIX}-openblas"
          "${MINGW_PACKAGE_PREFIX}-openblas64"
          "${MINGW_PACKAGE_PREFIX}-pastix"
-         $([[ ${MINGW_PACKAGE_PREFIX} == *-clang-* ]] || echo "${MINGW_PACKAGE_PREFIX}-gcc-libgfortran"))
+         $([[ ${MINGW_PACKAGE_PREFIX} == *-clang-* ]] || echo "${MINGW_PACKAGE_PREFIX}-gcc-libgfortran")
+         $([[ ${MINGW_PACKAGE_PREFIX} == *-clang-* ]] || echo "${MINGW_PACKAGE_PREFIX}-taucs"))
 makedepends=("${MINGW_PACKAGE_PREFIX}-fc"
              "${MINGW_PACKAGE_PREFIX}-spooles"
              "${MINGW_PACKAGE_PREFIX}-pkgconf")
@@ -55,7 +56,8 @@ build() {
   cd "${srcdir}/CalculiX/ccx_${pkgver}/src"
 
   if [[ ${MINGW_PACKAGE_PREFIX} != *-clang-* ]]; then
-    CFLAGS+=" -fopenmp -Wno-incompatible-pointer-types -Wno-implicit-function-declaration"
+    CFLAGS+=" -fopenmp -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -I ${MINGW_PREFIX}/include/taucs -DTAUCS"
+    LDFLAGS+=" -ltaucs"
     FC=gfortran
     export FFLAGS="-fallow-argument-mismatch -fopenmp -O2"
     export OMP_LIBS="-lgomp -lquadmath"
