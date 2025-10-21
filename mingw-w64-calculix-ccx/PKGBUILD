@@ -1,4 +1,4 @@
-# Maintainer: Rafał‚ Brzegowy <rafal.brzegowy@yahoo.com>
+# Maintainer: Rafał Brzegowy <rafal.brzegowy@yahoo.com>
 
 _realname=calculix-ccx
 pkgbase=mingw-w64-${_realname}
