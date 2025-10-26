@@ -67,6 +67,8 @@ build() {
       -DCMAKE_C_COMPILER=${MINGW_PREFIX}/bin/${CC}.exe \
       -DCMAKE_CXX_COMPILER=${MINGW_PREFIX}/bin/${CXX}.exe \
       -DPython_EXECUTABLE=${MINGW_PREFIX}/bin/python.exe \
+	  -DCMAKE_THREAD_LIBS_INIT="-pthread" \
+      -DCMAKE_HAVE_THREADS_LIBRARY=1 \
       -DSeacas_ENABLE_Fortran=OFF \
       -DTPL_ENABLE_X11=OFF \
       -DSeacas_ENABLE_TESTS=OFF \
@@ -87,6 +89,8 @@ build() {
       -DCMAKE_C_COMPILER=${MINGW_PREFIX}/bin/${CC}.exe \
       -DCMAKE_CXX_COMPILER=${MINGW_PREFIX}/bin/${CXX}.exe \
       -DPython_EXECUTABLE=${MINGW_PREFIX}/bin/python.exe \
+	  -DCMAKE_THREAD_LIBS_INIT="-pthread" \
+      -DCMAKE_HAVE_THREADS_LIBRARY=1 \
       -DSeacas_ENABLE_Fortran=OFF \
       -DTPL_ENABLE_X11=OFF \
       -DSeacas_ENABLE_TESTS=OFF \
