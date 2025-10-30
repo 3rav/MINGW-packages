@@ -29,10 +29,12 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
              "${MINGW_PACKAGE_PREFIX}-python")
 source=("https://github.com/gsjaardema/seacas/archive/v${_releases}/${_realname}-${pkgver}.tar.gz"
         "0001-cmake-add-libs.patch"
-        "0002-cmake-findHDF5.patch")
+        "0002-cmake-findHDF5.patch"
+		"0003-cmake-dependencies.patch")
 sha256sums=('f9351a8f1a555a015020f249b1e5c26a282fbb6e274f9b71eb38720d61267dda'
             'a3561756bfdeb942fc62add0aefa542b0e689b76a7f0d2d357e299465ee344d2'
-            '09c4406d57c5ca18b0d2f16161dd6f5e2c5d56f0f73e83bd77272d876569d5cc')
+            '09c4406d57c5ca18b0d2f16161dd6f5e2c5d56f0f73e83bd77272d876569d5cc'
+            '64b351e1bea6c52e78199760ef7dcbddfb52d1269680fa3c4fc21692a6a80678')
 noextract=(${_realname}-${pkgver}.tar.gz)
 
 prepare() {
@@ -42,6 +44,7 @@ prepare() {
   cd "${srcdir}/${_realname}-${_releases}"
   patch -p1 -i "${srcdir}/0001-cmake-add-libs.patch"
   #patch -Np1 -i "${srcdir}/0002-cmake-findHDF5.patch"
+  patch -Np1 -i "${srcdir}/0003-cmake-dependencies.patch"
 }
 
 build() {
