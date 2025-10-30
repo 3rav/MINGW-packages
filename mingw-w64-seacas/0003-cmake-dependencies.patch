@@ -1,0 +1,8 @@
+diff -urN seacas-2025-10-14_orig/packages/zoltan/cmake/Dependencies.cmake seacas-2025-10-14/packages/zoltan/cmake/Dependencies.cmake
+--- seacas-2025-10-14_orig/packages/zoltan/cmake/Dependencies.cmake	2025-10-15 20:20:56.000000000 +0200
++++ seacas-2025-10-14/packages/zoltan/cmake/Dependencies.cmake	2025-10-30 19:26:53.312529900 +0100
+@@ -6,3 +6,4 @@
+ SET(LIB_OPTIONAL_DEP_TPLS MPI METIS ParMETIS PaToH Scotch Zlib OVIS)
+ SET(TEST_REQUIRED_DEP_TPLS)
+ SET(TEST_OPTIONAL_DEP_TPLS)
++SET(LIB_REQUIRED_DEP_PACKAGES Pthread)
