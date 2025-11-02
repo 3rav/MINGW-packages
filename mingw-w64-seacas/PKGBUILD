@@ -30,11 +30,13 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cc"
 source=("https://github.com/gsjaardema/seacas/archive/v${_releases}/${_realname}-${pkgver}.tar.gz"
         "0001-cmake-add-libs.patch"
         "0002-cmake-findHDF5.patch"
-		"0003-cmake-dependencies.patch")
+		"0003-cmake-dependencies.patch"
+		"0004_cmake-config.patch::https://patch-diff.githubusercontent.com/raw/sandialabs/seacas/pull/768.patch")
 sha256sums=('f9351a8f1a555a015020f249b1e5c26a282fbb6e274f9b71eb38720d61267dda'
             'a3561756bfdeb942fc62add0aefa542b0e689b76a7f0d2d357e299465ee344d2'
             '09c4406d57c5ca18b0d2f16161dd6f5e2c5d56f0f73e83bd77272d876569d5cc'
-            '64b351e1bea6c52e78199760ef7dcbddfb52d1269680fa3c4fc21692a6a80678')
+            '64b351e1bea6c52e78199760ef7dcbddfb52d1269680fa3c4fc21692a6a80678'
+			'00f0030dff71f82ef290cfe456a41533322e67afd12ed92f3f429a0754f1aa6e')
 noextract=(${_realname}-${pkgver}.tar.gz)
 
 prepare() {
@@ -45,6 +47,7 @@ prepare() {
   patch -p1 -i "${srcdir}/0001-cmake-add-libs.patch"
   #patch -Np1 -i "${srcdir}/0002-cmake-findHDF5.patch"
   patch -Np1 -i "${srcdir}/0003-cmake-dependencies.patch"
+  patch -Np1 -i "${srcdir}/0004_cmake-config.patch"
 }
 
 build() {
@@ -63,6 +66,7 @@ build() {
   MSYS2_ARG_CONV_EXCL="-DCMAKE_INSTALL_PREFIX=" \
     INSTALL_PATH=${MINGW_PREFIX} \
     THREADSAFE=ON \
+	PARMETIS=NO \
     ../cmake-config \
       -GNinja \
       -DCMAKE_INSTALL_PREFIX=${MINGW_PREFIX} \
