@@ -22,9 +22,10 @@ depends=("${MINGW_PACKAGE_PREFIX}-precice"
          "${MINGW_PACKAGE_PREFIX}-python-matplotlib")
 makedepends=("${MINGW_PACKAGE_PREFIX}-python-pkgconfig"
              "${MINGW_PACKAGE_PREFIX}-python-build"
-	     "${MINGW_PACKAGE_PREFIX}-cython"
+	         "${MINGW_PACKAGE_PREFIX}-cython"
              "${MINGW_PACKAGE_PREFIX}-python-installer"
-             "${MINGW_PACKAGE_PREFIX}-python-setuptools")
+             "${MINGW_PACKAGE_PREFIX}-python-setuptools"
+			 "${MINGW_PACKAGE_PREFIX}-python-wheel")
 source=("https://github.com/precice/python-bindings/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('7ac05da395cab9549a6c87a858cd4bc4776ca55190bc37007c10e5814d22fc57')
 
