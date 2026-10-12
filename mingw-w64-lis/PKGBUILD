@@ -47,7 +47,7 @@ build() {
     _extra_config+=("--disable-mpi" "--disable-sse2" "--disable-fma")
   fi
 
-  ./configure \
+  ./configure CFLAGS="-std=gnu89" \
     --prefix=${MINGW_PREFIX} \
     --enable-omp \
     --enable-shared \
